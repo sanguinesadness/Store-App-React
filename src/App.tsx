@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useEffect } from 'react';
+import Header from './components/Header';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Footer from './components/Footer';
+import HomePage from './components/pages/HomePage';
+import CategoryPage from './components/pages/CategoryPage';
+import { useTypedSelector } from './hooks/useTypedSelector';
+import { useDispatch } from 'react-redux';
+import { fetchCategories } from './store/actions/category';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: FC = () => {
+    const { selectedCategory } = useTypedSelector(root => root.category);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        fetchCategories(dispatch);
+    }, []);
+    
+    return (
+        <BrowserRouter>
+            <Header/>
+            <div id="main-container">
+                <Route path="/" exact>
+                    <HomePage/>
+                </Route>
+                <Route path={`/${selectedCategory?.slug}`} exact>
+                    <CategoryPage/>
+                </Route>
+            </div>
+            <Footer/>
+        </BrowserRouter>
+    )
 }
 
 export default App;
