@@ -1,4 +1,3 @@
-import { Category } from "@chec/commerce.js/types/category";
 import { Dispatch } from "react";
 import { commerce } from "../../lib/commerce";
 import { CategoryAction, fetchCategoriesAction, fetchCategoriesErrorAction, fetchCategoriesSuccessAction } from "../../types/category";

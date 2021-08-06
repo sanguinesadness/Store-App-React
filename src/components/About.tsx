@@ -10,7 +10,7 @@ interface AboutProps {
 
 const About: FC<AboutProps> = (props) => {
     return (
-        <div id="about-screen">
+        <div className="about-screen">
             <div className="container">
                 <section className="info-section">
                     <h3 className="title">
@@ -23,7 +23,7 @@ const About: FC<AboutProps> = (props) => {
                         </p>
                     </div>
                     <div className="buttons">
-                        <a className="button with-icon blue" href="https://github.com" target="_blank" rel="noopener noreferrer">
+                        <a className="button with-icon blue" href="https://github.com/sanguinesadness/Store-App-React" target="_blank" rel="noopener noreferrer">
                             <span>View on GitHub</span>
                             <img src={github} alt="" />
                         </a>

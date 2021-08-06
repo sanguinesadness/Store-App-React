@@ -1,0 +1,26 @@
+[
+    {
+        "id": "cat_bO6J5ax6VoEjpK",
+        "name": "Electronics",
+        "slug": "electronics",
+        "icon": "electronics.svg"
+    },
+    {
+        "id": "cat_8XO3wp7AZlYAzQ",
+        "name": "Jewelry",
+        "slug": "jewelry",
+        "icon": "jewelry.svg"
+    },
+    {
+        "id": "cat_kpnNwADKXlmXB3",
+        "name": "Women",
+        "slug": "women",
+        "icon": "female-clothes.svg"
+    },
+    {
+        "id": "cat_NqKE50rxXwdgBL",
+        "name": "Men",
+        "slug": "men",
+        "icon": "male-clothes.svg"
+    }
+]

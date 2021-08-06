@@ -1,5 +1,8 @@
-import React, { FC, useState } from 'react'
-import { useEffect } from 'react'
+import React, { FC, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { setScrollPercentAction } from '../types/scroll';
 
 const ScrollBar: FC = () => {
     const calculatePercent = (): number => {
@@ -10,10 +13,12 @@ const ScrollBar: FC = () => {
         return Math.round(percent);
     }
 
-    const [percent, setPercent] = useState<number>(calculatePercent());
+    const { percent } = useTypedSelector(root => root.scroll);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        window.addEventListener('scroll', () => setPercent(calculatePercent()))
+        dispatch(setScrollPercentAction(calculatePercent()));
+        window.addEventListener('scroll', () => dispatch(setScrollPercentAction(calculatePercent())))
     }, [])
 
     return (
