@@ -12,7 +12,7 @@ const Footer: FC = () => {
                     <span>&copy; Rustam, {new Date().getFullYear()}</span>
                 </div>
                 <div className="purpose">
-                    <span>📚 Made for educational <b>purposes</b> only</span>
+                    <span>📚 Made for <b>educational</b> purposes only</span>
                 </div>
                 <div className="social-links">
                     <a className="vk social-link" href="https://vk.com/id152544760" target="_blank" rel="noopener noreferrer">

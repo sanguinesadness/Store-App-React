@@ -3,7 +3,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import CartProduct from './CartProduct';
 
 const CartProducts: FC = () => {
-    const { cartProducts } = useTypedSelector(root => root.cart);
+    const { lcartProducts: cartProducts } = useTypedSelector(root => root.localCart);
 
     return (
         <div className="cart-products">

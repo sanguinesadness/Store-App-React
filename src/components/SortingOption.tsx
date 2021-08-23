@@ -6,9 +6,10 @@ interface SortingOptionProps {
     sortingOption: SortingOptionType;
     setSelectedOption: React.Dispatch<SetStateAction<SortingOptionType | null>>;
     isSelected: boolean;
+    disabled?: boolean;
 }
 
-const SortingOption: FC<SortingOptionProps> = ({ sortingOption, setSelectedOption, isSelected }) => {
+const SortingOption: FC<SortingOptionProps> = ({ sortingOption, setSelectedOption, isSelected, disabled }) => {
     const dispatch = useDispatch();
     const [optionState, setOptionState] = useState<SortingOptionType>(sortingOption);
 
@@ -17,6 +18,10 @@ const SortingOption: FC<SortingOptionProps> = ({ sortingOption, setSelectedOptio
     }, [optionState]);
 
     const clickHandler = () => {
+        if (disabled) {
+            return;
+        }
+
         if (isSelected) {
             setOptionState({ ...optionState, ascending: !optionState.ascending });
         }
@@ -27,7 +32,7 @@ const SortingOption: FC<SortingOptionProps> = ({ sortingOption, setSelectedOptio
     }
 
     return (
-        <div className={`sorting-option ${isSelected ? "active" : ""}`} onClick={clickHandler}>
+        <div className={`sorting-option ${disabled ? "disabled" : isSelected ? "selected" : ""}`} onClick={clickHandler}>
             <span className="name">{optionState.name}</span>
             <span className="type">
                 {optionState.ascending ? "🠕" : "🠗"}

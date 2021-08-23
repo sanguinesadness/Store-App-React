@@ -2,17 +2,21 @@ import { combineReducers } from "redux";
 import { productReducer } from "./productReducer";
 import { categoryReducer } from "./categoryReducer";
 import { scrollReducer } from "./scrollReducer";
-import { cartReducer } from "./cartReducer";
+import { localCartReducer } from "./localCartReducer";
 import { wishListReducer } from "./wishListReducer";
 import { sortingReducer } from "./sortingOptionReducer";
+import { loadingReducer } from "./loadingReducer";
+import { commerceCartReducer } from "./commerceCartReducer";
 
 export const rootReducer = combineReducers({
     product: productReducer,
     category: categoryReducer,
     scroll: scrollReducer,
-    cart: cartReducer,
+    localCart: localCartReducer,
+    commerceCart: commerceCartReducer,
     wishList: wishListReducer,
-    sorting: sortingReducer
+    sorting: sortingReducer,
+    loading: loadingReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -4,29 +4,19 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import ProductCard from './ProductCard';
 import ReactLoading from 'react-loading';
 import { SortingNames } from '../types/sortingOption';
+import { BsInfoSquareFill } from 'react-icons/bs';
+import SortingOptions from './SortingOptions';
 
 interface ProductsGridProps {
+    name: string;
     products: Product[];
+    emptyErrorMsg?: string;
 }
 
-const ProductsGrid: FC<ProductsGridProps> = ({ products }) => {
-    const cartState = useTypedSelector(root => root.cart);
-    const wishlistState = useTypedSelector(root => root.wishList);
+const ProductsGrid: FC<ProductsGridProps> = ({ name, products, emptyErrorMsg }) => {
     const sortingState = useTypedSelector(root => root.sorting);
-
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        timeoutLoading();
-
-        return () => {
-            setLoading(false);
-        }
-    }, []);
-
-    const timeoutLoading = () => {
-        setTimeout(() => setLoading(false), 500);
-    }
+    const productState = useTypedSelector(root => root.product);
+    const cartState = useTypedSelector(root => root.commerceCart);
 
     const sortingHandler = (product1: Product, product2: Product): number => {
         if (!sortingState.activeOption) {
@@ -56,23 +46,60 @@ const ProductsGrid: FC<ProductsGridProps> = ({ products }) => {
         }
     }
 
+    const [sortingDisabled, setSortingDisabled] = useState<boolean>(true);
+
+    useEffect(() => {
+        if (productState.loading) {
+            setSortingDisabled(true);
+        }
+        else {
+            setSortingDisabled(Boolean(products.length === 0));
+        }
+    }, [productState.products]);
+
+    useEffect(() => {
+        if (products.length === 0) {
+            setSortingDisabled(true);
+        }
+        else {
+            setSortingDisabled(false);
+        }
+    }, [products.length]);
+
     return (
-        <div className="products-grid__wrapper">
-            {
-                loading ?
-                    <ReactLoading type="bubbles" className="products-loading"/>
-                :
-                    <div className="products-grid">
-                        {
-                            products.sort(sortingHandler)
-                                    .map(product =>
-                                        <ProductCard key={product.id} product={product}
-                                                     isInCart={Boolean(cartState.cartProducts.find(cp => cp.product.id === product.id))}
-                                                     isInWishlist={wishlistState.products.includes(product)}/>)
-                        }
-                    </div>
-            }
-        </div>
+        <>
+            <header className="products-grid-header">
+                <div className="info">
+                    <span className="title">{name}</span>
+                    <span className="amount">{products.length}</span>
+                </div>
+                <SortingOptions disabled={sortingDisabled}/>
+            </header>
+            <div className="products-grid__wrapper">
+                {
+                    productState.loading || cartState.loading ?
+                        <ReactLoading type="bubbles" className="products-grid-loading loading-spinner"/>
+                    :
+                    productState.error ?
+                        <div className="page-error products-grid-error">
+                            <BsInfoSquareFill className="icon" />
+                            <span className="message">{productState.error}</span>
+                        </div>
+                    :
+                    products.length > 0 ?
+                        <div className="products-grid">
+                            {products.sort(sortingHandler).map(product =>
+                                <ProductCard key={product.id} product={product}/>
+                            )}
+                        </div>
+                    :
+                        <div className="page-error products-grid-empty-message">
+                            <BsInfoSquareFill className="icon" />
+                            <span className="text">{emptyErrorMsg || "List is empty"}</span>
+                        </div>
+                }
+            </div>
+        </>
     )
 }
 

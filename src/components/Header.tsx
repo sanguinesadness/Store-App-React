@@ -4,14 +4,16 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import logo from '../icons/logo.svg';
-import account from '../icons/account.svg';
-import like from '../icons/like.svg';
 import { NavLink } from 'react-router-dom';
 import { setSelectedCategoryAction } from '../types/category';
 import ScrollBar from './ScrollBar';
 import { useState } from 'react';
 import { Category } from '@chec/commerce.js/types/category';
 import Cart from './Cart';
+import Wishlist from './Wishlist';
+import Account from './Account';
+import { PropagateLoader, PuffLoader } from 'react-spinners';
+import ReactLoading from 'react-loading';
 
 const Header: FC = () => {
     const { percent } = useTypedSelector(root => root.scroll);
@@ -36,13 +38,13 @@ const Header: FC = () => {
                     </NavLink>
                 </div>
                 <div className="product-categories">
-                    {categories.map(category => 
+                    {categories.map(category =>
                         <NavLink to={`/${category.slug}`} className="product-category" key={category.id}
-                            activeClassName="selected" isActive={(match) => {
+                            isActive={(match) => {
                                 if (!match) {
                                     return false;
                                 }
-                                
+
                                 // wrap in setTimeout to avoid warning
                                 setTimeout(() => setCurrentCategory(category), 0);
 
@@ -53,12 +55,8 @@ const Header: FC = () => {
                     )}
                 </div>
                 <div className="user-actions">
-                    <span className="account user-action">
-                        <img className="account-icon" src={account} alt="account"/>
-                    </span>
-                    <NavLink to="/wishlist" className="saved user-action">
-                        <img className="saved-icon" src={like} alt="saved"/>
-                    </NavLink>
+                    <Account/>
+                    <Wishlist/>
                     <Cart/>
                 </div>
             </div>

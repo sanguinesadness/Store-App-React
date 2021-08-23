@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import ProductsGridHeader from '../ProductsGridHeader';
 import ProductsGrid from '../ProductsGrid';
 import { useEffect } from 'react';
 import { setScrollPercentAction } from '../../types/scroll';
@@ -51,7 +50,7 @@ const CategoryPage: FC = () => {
 
             setCategoryProducts(cProducts);
         }
-    }, [])
+    }, [products])
 
     if (!selectedCategory) {
         history.push("/");
@@ -60,9 +59,9 @@ const CategoryPage: FC = () => {
 
     return (
         <div id="category-page">
-            <ProductsGridHeader categoryName={selectedCategory?.name || ""} 
-                                itemAmount={selectedCategory?.products || 0}/>
-            <ProductsGrid products={categoryProducts}/>
+            <ProductsGrid products={categoryProducts} 
+                          emptyErrorMsg="This category is currently empty"
+                          name={selectedCategory?.name || ""}/>
         </div>
     )
 }

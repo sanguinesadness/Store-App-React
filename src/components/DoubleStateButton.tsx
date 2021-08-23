@@ -18,6 +18,8 @@ interface DoubleStateButtonProps {
     changeState?: boolean;
     // and do not forget about setting external state to initial (FALSE)
     setChangeState?: React.Dispatch<SetStateAction<boolean>>;
+    additionalClickHandler?: () => void;
+    beforeAction?: () => Promise<unknown>;
 }
 
 export enum ActionResults {
@@ -58,27 +60,31 @@ const DoubleStateButton: FC<DoubleStateButtonProps> = (props) => {
     }
 
     const clickHandler = () => {
-        let action;
+        Promise.resolve(props.beforeAction?.()).then(() => {
+            props.additionalClickHandler?.call({});
 
-        switch (buttonStateName) {
-            case ButtonStateNames.FIRST:
-                action = props.firstState.action;
-                break;
-            case ButtonStateNames.SECOND:
-                action = props.secondState.action;
-                break;
-        }
-
-        if (action) {
-            Promise.resolve(action?.()).then(result => {
-                if (result === ActionResults.SUCCESS) {
-                    toggleState();
-                }
-            });
-        }
-        else {
-            toggleState();
-        }
+            let action;
+    
+            switch (buttonStateName) {
+                case ButtonStateNames.FIRST:
+                    action = props.firstState.action;
+                    break;
+                case ButtonStateNames.SECOND:
+                    action = props.secondState.action;
+                    break;
+            }
+    
+            if (action) {
+                Promise.resolve(action?.()).then(result => {
+                    if (result === ActionResults.SUCCESS) {
+                        toggleState();
+                    }
+                });
+            }
+            else {
+                toggleState();
+            }
+        });
     }
 
     return (

@@ -5,7 +5,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { setScrollPercentAction } from '../../types/scroll';
 import { setActiveSortingOptionAction, setAvailableSortingOptionsAction, SortingNames, SortingOption } from '../../types/sortingOption';
 import ProductsGrid from '../ProductsGrid';
-import ProductsGridHeader from '../ProductsGridHeader';
 
 // sorting options for products in the grid
 const wishlistPageSortingOptions: SortingOption[] = [
@@ -32,8 +31,9 @@ const WishlistPage: FC = () => {
 
     return (
         <div id="wishlist-page">
-            <ProductsGridHeader categoryName="Saved products" itemAmount={products.length}/>
-            <ProductsGrid products={products}/>
+            <ProductsGrid products={products} 
+                          emptyErrorMsg="Wishlist is empty"
+                          name="Saved products"/>
         </div>
     )
 }
