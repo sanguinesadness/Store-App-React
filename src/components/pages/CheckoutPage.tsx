@@ -21,6 +21,7 @@ import ReactLoading from 'react-loading';
 import dudePicture from '../../icons/dude.svg';
 import { useDispatch } from 'react-redux';
 import { clearLocalCartAction } from '../../types/localCart';
+import TextInput from '../inputs/TextInput';
 
 const emptyBillingObj: Billing = {
     customer: { firstname: "", lastname: "", email: "" },
@@ -78,15 +79,15 @@ const CheckoutPage: FC = () => {
     const [billing, setBilling] = useState<Billing>(emptyBillingObj);
 
     const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setBilling({ ...billing, customer: { ...billing.customer, email: event.currentTarget.value } })
+        setBilling({ ...billing, customer: { ...billing.customer, email: event.currentTarget.value } });
     }
 
     const onCountryChange = (event: SelectInputEvent) => {
-        setBilling({ ...billing, country: { id: event.option?.id as string, name: event.option?.value as string } })
+        setBilling({ ...billing, country: { id: event.option?.id as string, name: event.option?.value as string } });
     }
 
     const onZipcodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setBilling({ ...billing, zipcode: event.currentTarget.value })
+        setBilling({ ...billing, zipcode: event.currentTarget.value });
     }
 
     const onCardChange = (event: CreditCardEvent) => {
@@ -190,7 +191,7 @@ const CheckoutPage: FC = () => {
             {
                 cartProducts.length > 0 ?
                     itemsLoading ?
-                        <div className="loading__wrapper">
+                        <div className="page-loading">
                             <ReactLoading type="bubbles" className="checkout-loading loading-spinner"/>
                         </div>
                         :
@@ -237,9 +238,11 @@ const CheckoutPage: FC = () => {
                                     <div className="contact-info">
                                         <form name="contact-info-form">
                                             <div className="input-block">
-                                                <label htmlFor="email">Email Address</label>
-                                                <input name="email" type="email"
-                                                    placeholder="myemail@example.com" onChange={onEmailChange} />
+                                                <TextInput
+                                                    label="Email Address"
+                                                    onValueChange={onEmailChange}
+                                                    placeholder="myemail@example.com"
+                                                    type="email" />
                                             </div>
                                             <div className="input-block">
                                                 <RadioInput label="Payment Method" options={[
@@ -252,9 +255,11 @@ const CheckoutPage: FC = () => {
                                                     onChange={onCountryChange} />
                                             </div>
                                             <div className="input-block">
-                                                <label htmlFor="zipcode">Zip/Post Code</label>
-                                                <input name="zipcode" type="text"
-                                                    placeholder="94107" onChange={onZipcodeChange} />
+                                                <TextInput
+                                                    label="Zip/Post Code"
+                                                    onValueChange={onZipcodeChange}
+                                                    placeholder="94107"
+                                                    type="text" />
                                             </div>
                                         </form>
                                     </div>
@@ -305,7 +310,7 @@ const CheckoutPage: FC = () => {
             <Modal className="checkout-modal" isOpen={isModalOpen}>
                 {
                     paymentLoading ? 
-                        <div className="checkout-modal__loading">
+                        <div className="loading-modal__wrapper">
                             <h3 className="modal-title">Loading...</h3>
                             <div className="modal-body">
                                 <ReactLoading type="spin" className="loading-spinner" />

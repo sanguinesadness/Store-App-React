@@ -51,7 +51,7 @@ const Cart: FC = () => {
     }, [cartProducts]);
 
     return (
-        <div className={`cart`}
+        <div className="cart"
              onMouseEnter={showPopup} 
              onMouseLeave={hidePopup}>
             {

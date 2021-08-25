@@ -7,6 +7,7 @@ import { wishListReducer } from "./wishListReducer";
 import { sortingReducer } from "./sortingOptionReducer";
 import { loadingReducer } from "./loadingReducer";
 import { commerceCartReducer } from "./commerceCartReducer";
+import { customerReducer } from "./customerReducer";
 
 export const rootReducer = combineReducers({
     product: productReducer,
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
     commerceCart: commerceCartReducer,
     wishList: wishListReducer,
     sorting: sortingReducer,
-    loading: loadingReducer
+    loading: loadingReducer,
+    customer: customerReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

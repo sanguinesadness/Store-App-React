@@ -38,7 +38,7 @@ const ProductPage: FC = () => {
         <div id="product-page">
             {
                 loading ?
-                    <div className="loading__wrapper">
+                    <div className="page-loading">
                         <ReactLoading type="bubbles" className="product-page-loading loading-spinner"/>
                     </div>
                 : selectedProduct ?
@@ -54,7 +54,7 @@ const ProductPage: FC = () => {
                         <RelatedProducts product={selectedProduct}/>
                     </div>
                 : 
-                    <div className="product-page-error">
+                    <div className="product-page-error page-error">
                         <BsInfoSquareFill className="icon" />
                         <span className="message">{error || "Error occured while loading product info. Please try again"}</span>
                     </div>

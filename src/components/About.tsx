@@ -29,7 +29,7 @@ const About: FC<AboutProps> = ({ onClickScroll }) => {
     }, []);
 
     return (
-        <div className="about-screen">
+        <div className="info-screen">
             <div className="container">
                 <section className="info-section" ref={infoRef}>
                     <h3 className="title">

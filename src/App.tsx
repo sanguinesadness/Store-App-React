@@ -14,6 +14,8 @@ import ScrollToTop from './components/ScrollToTop';
 import Modal from 'react-modal';
 import CheckoutPage from './components/pages/CheckoutPage';
 import { commerceCartToLocal, fetchCommerceCart } from './store/actions/commerceCart';
+import LoginResultPage from './components/pages/LoginResultPage';
+import { commerce } from './lib/commerce';
 
 Modal.setAppElement("#root");
 
@@ -34,6 +36,10 @@ const App: FC = () => {
         dispatch(commerceCartToLocal(products, lineItems));
     }, [products, lineItems]);
 
+    useEffect(() => {
+        dispatch(fetchCommerceCart());
+    }, [commerce.customer.isLoggedIn()]);
+
     return (
         <BrowserRouter>
             <ScrollToTop />
@@ -48,6 +54,7 @@ const App: FC = () => {
                                 <Route path={`/${selectedCategory?.slug}`} exact component={CategoryPage} />
                                 <Route path={`/${selectedCategory?.slug}/:id`} exact component={ProductPage} />
                                 <Route path="/wishlist" exact component={WishlistPage} />
+                                <Route path="/login/callback/:token" exact component={LoginResultPage}/>
                             </Switch>
                         </div>
                         <Footer />

@@ -78,7 +78,9 @@ const ProductsGrid: FC<ProductsGridProps> = ({ name, products, emptyErrorMsg }) 
             <div className="products-grid__wrapper">
                 {
                     productState.loading || cartState.loading ?
-                        <ReactLoading type="bubbles" className="products-grid-loading loading-spinner"/>
+                        <div className="page-loading">
+                            <ReactLoading type="bubbles" className="products-grid-loading loading-spinner"/>
+                        </div>
                     :
                     productState.error ?
                         <div className="page-error products-grid-error">
