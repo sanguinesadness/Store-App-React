@@ -27,6 +27,7 @@
     "react-modal": "^3.14.3",
     "react-placeholder-loading": "^0.5.22",
     "react-redux": "^7.2.4",
+    "react-responsive": "^9.0.0-beta.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-spinners": "^0.11.0",

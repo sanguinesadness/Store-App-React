@@ -1,64 +1,53 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import logo from '../icons/logo.svg';
 import { NavLink } from 'react-router-dom';
-import { setSelectedCategoryAction } from '../types/category';
 import ScrollBar from './ScrollBar';
 import { useState } from 'react';
-import { Category } from '@chec/commerce.js/types/category';
-import Cart from './Cart';
-import Wishlist from './Wishlist';
-import Account from './Account';
-import { PropagateLoader, PuffLoader } from 'react-spinners';
-import ReactLoading from 'react-loading';
+import { useMediaQuery } from 'react-responsive';
+import BurgerMenu from './BurgerMenu';
+import ProductCategories from './ProductCategories';
+import UserActions from './UserActions';
+import { useEffect } from 'react';
 
 const Header: FC = () => {
     const { percent } = useTypedSelector(root => root.scroll);
-    const { categories, loading, error } = useTypedSelector(root => root.category);
-    const dispatch = useDispatch();
 
-    const [currentCategory, setCurrentCategory] = useState<Category>();
+    const isMobileScreen = useMediaQuery({ query: "(max-width: 800px)" });
+    const [isBurgerExpanded, setIsBurgerExpanded] = useState<boolean>(false);
 
+    const [currentScrollPos, setCurrentScrollPos] = useState<number>(window.pageYOffset);
+    const [prevScrollPos, setPrevScrollPos] = useState<number>(-1);
+    const [headerState, setHeaderState] = useState<"hidden" | "visible">();
+    
     useEffect(() => {
-        if (currentCategory) {
-            dispatch(setSelectedCategoryAction(currentCategory));
+        setPrevScrollPos(currentScrollPos);
+        setCurrentScrollPos(window.pageYOffset);
+        setHeaderState(prevScrollPos < currentScrollPos ? "hidden" : "visible");
+
+        if (isMobileScreen && headerState === "visible") {
+            setIsBurgerExpanded(false);
         }
-    }, [currentCategory]);
+    }, [window.pageYOffset])
 
     return (
-        <header className={`header ${percent > 0 ? "not-at-the-top" : "at-the-top"}`}>
+        <header className={`header ${percent > 0 ? "not-at-the-top" : "at-the-top"} ${isBurgerExpanded ? "burger-expanded" : ""} ${isMobileScreen ? headerState : ""}`}>
             <ScrollBar/>
             <div className="container">
-                <div className="main-logo__container">
-                    <NavLink to="/">
-                        <img className="main-logo" src={logo} alt="logo"/>
-                    </NavLink>
-                </div>
-                <div className="product-categories">
-                    {categories.map(category =>
-                        <NavLink to={`/${category.slug}`} className="product-category" key={category.id}
-                            isActive={(match) => {
-                                if (!match) {
-                                    return false;
-                                }
-
-                                // wrap in setTimeout to avoid warning
-                                setTimeout(() => setCurrentCategory(category), 0);
-
-                                return true;
-                            }}>
-                            {category.name}
-                        </NavLink>
-                    )}
-                </div>
-                <div className="user-actions">
-                    <Account/>
-                    <Wishlist/>
-                    <Cart/>
-                </div>
+                {
+                    isMobileScreen ?
+                        <BurgerMenu isExpanded={isBurgerExpanded} setIsExpanded={setIsBurgerExpanded}/>
+                        :
+                        <div className="default-menu">
+                            <div className="main-logo__container">
+                                <NavLink to="/" exact>
+                                    <span className="main-logo" />
+                                </NavLink>
+                            </div>
+                            <ProductCategories />
+                            <UserActions />
+                        </div>
+                }
             </div>
         </header>
     )

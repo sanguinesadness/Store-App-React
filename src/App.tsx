@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import Header from './components/Header';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Footer from './components/Footer';
 import HomePage from './components/pages/HomePage';
 import CategoryPage from './components/pages/CategoryPage';

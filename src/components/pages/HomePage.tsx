@@ -4,6 +4,7 @@ import CategoryPicker from '../CategoryPicker';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { setScrollPercentAction } from '../../types/scroll';
+import { useHistory } from 'react-router-dom';
 
 const HomePage: FC = () => {
     const categoryRef = useRef<HTMLDivElement>(null);
