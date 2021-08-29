@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/Store-App-React/static/css/main.b31a60c8.chunk.css",
+    "main.js": "/Store-App-React/static/js/main.6c3529f4.chunk.js",
+    "main.js.map": "/Store-App-React/static/js/main.6c3529f4.chunk.js.map",
+    "runtime-main.js": "/Store-App-React/static/js/runtime-main.5becda96.js",
+    "runtime-main.js.map": "/Store-App-React/static/js/runtime-main.5becda96.js.map",
+    "static/css/2.727685ba.chunk.css": "/Store-App-React/static/css/2.727685ba.chunk.css",
+    "static/js/2.ab6e262c.chunk.js": "/Store-App-React/static/js/2.ab6e262c.chunk.js",
+    "static/js/2.ab6e262c.chunk.js.map": "/Store-App-React/static/js/2.ab6e262c.chunk.js.map",
+    "index.html": "/Store-App-React/index.html",
+    "static/css/2.727685ba.chunk.css.map": "/Store-App-React/static/css/2.727685ba.chunk.css.map",
+    "static/css/main.b31a60c8.chunk.css.map": "/Store-App-React/static/css/main.b31a60c8.chunk.css.map",
+    "static/js/2.ab6e262c.chunk.js.LICENSE.txt": "/Store-App-React/static/js/2.ab6e262c.chunk.js.LICENSE.txt",
+    "static/media/account_bg.aae04ef3.svg": "/Store-App-React/static/media/account_bg.aae04ef3.svg",
+    "static/media/account_front.d6e39c60.svg": "/Store-App-React/static/media/account_front.d6e39c60.svg",
+    "static/media/chec_logo.1314b2bc.svg": "/Store-App-React/static/media/chec_logo.1314b2bc.svg",
+    "static/media/checked_sign.7446fd9f.svg": "/Store-App-React/static/media/checked_sign.7446fd9f.svg",
+    "static/media/dude.8a1c71a5.svg": "/Store-App-React/static/media/dude.8a1c71a5.svg",
+    "static/media/facebook-dark.10df22f9.svg": "/Store-App-React/static/media/facebook-dark.10df22f9.svg",
+    "static/media/style.css": "/Store-App-React/static/media/fakestore_logo_short.5a93729e.svg",
+    "static/media/girl.90b5c220.svg": "/Store-App-React/static/media/girl.90b5c220.svg",
+    "static/media/github-dark.349f7fa5.svg": "/Store-App-React/static/media/github-dark.349f7fa5.svg",
+    "static/media/github.986ff804.svg": "/Store-App-React/static/media/github.986ff804.svg",
+    "static/media/hand-cart.c17a7ab3.svg": "/Store-App-React/static/media/hand-cart.c17a7ab3.svg",
+    "static/media/idea-bg.0f340c03.svg": "/Store-App-React/static/media/idea-bg.0f340c03.svg",
+    "static/media/idea.244c5a38.svg": "/Store-App-React/static/media/idea.244c5a38.svg",
+    "static/media/instagram-dark.5aa6c01b.svg": "/Store-App-React/static/media/instagram-dark.5aa6c01b.svg",
+    "static/media/updated.619f4ccb.svg": "/Store-App-React/static/media/updated.619f4ccb.svg",
+    "static/media/vk-dark.dba5bedb.svg": "/Store-App-React/static/media/vk-dark.dba5bedb.svg",
+    "static/media/wheel-cart.dbd0852d.svg": "/Store-App-React/static/media/wheel-cart.dbd0852d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5becda96.js",
+    "static/css/2.727685ba.chunk.css",
+    "static/js/2.ab6e262c.chunk.js",
+    "static/css/main.b31a60c8.chunk.css",
+    "static/js/main.6c3529f4.chunk.js"
+  ]
+}
