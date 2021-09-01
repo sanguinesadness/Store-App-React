@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Store-App-React/static/css/main.206e96cb.chunk.css",
-    "main.js": "/Store-App-React/static/js/main.9ba1d09f.chunk.js",
-    "main.js.map": "/Store-App-React/static/js/main.9ba1d09f.chunk.js.map",
+    "main.css": "/Store-App-React/static/css/main.e6eed2ad.chunk.css",
+    "main.js": "/Store-App-React/static/js/main.90ca550f.chunk.js",
+    "main.js.map": "/Store-App-React/static/js/main.90ca550f.chunk.js.map",
     "runtime-main.js": "/Store-App-React/static/js/runtime-main.5becda96.js",
     "runtime-main.js.map": "/Store-App-React/static/js/runtime-main.5becda96.js.map",
     "static/css/2.727685ba.chunk.css": "/Store-App-React/static/css/2.727685ba.chunk.css",
-    "static/js/2.b78e7e8c.chunk.js": "/Store-App-React/static/js/2.b78e7e8c.chunk.js",
-    "static/js/2.b78e7e8c.chunk.js.map": "/Store-App-React/static/js/2.b78e7e8c.chunk.js.map",
+    "static/js/2.ab5fe306.chunk.js": "/Store-App-React/static/js/2.ab5fe306.chunk.js",
+    "static/js/2.ab5fe306.chunk.js.map": "/Store-App-React/static/js/2.ab5fe306.chunk.js.map",
     "index.html": "/Store-App-React/index.html",
     "static/css/2.727685ba.chunk.css.map": "/Store-App-React/static/css/2.727685ba.chunk.css.map",
-    "static/css/main.206e96cb.chunk.css.map": "/Store-App-React/static/css/main.206e96cb.chunk.css.map",
-    "static/js/2.b78e7e8c.chunk.js.LICENSE.txt": "/Store-App-React/static/js/2.b78e7e8c.chunk.js.LICENSE.txt",
+    "static/css/main.e6eed2ad.chunk.css.map": "/Store-App-React/static/css/main.e6eed2ad.chunk.css.map",
+    "static/js/2.ab5fe306.chunk.js.LICENSE.txt": "/Store-App-React/static/js/2.ab5fe306.chunk.js.LICENSE.txt",
     "static/media/account_bg.aae04ef3.svg": "/Store-App-React/static/media/account_bg.aae04ef3.svg",
     "static/media/account_front.d6e39c60.svg": "/Store-App-React/static/media/account_front.d6e39c60.svg",
     "static/media/chec_logo.1314b2bc.svg": "/Store-App-React/static/media/chec_logo.1314b2bc.svg",
@@ -33,8 +33,8 @@
   "entrypoints": [
     "static/js/runtime-main.5becda96.js",
     "static/css/2.727685ba.chunk.css",
-    "static/js/2.b78e7e8c.chunk.js",
-    "static/css/main.206e96cb.chunk.css",
-    "static/js/main.9ba1d09f.chunk.js"
+    "static/js/2.ab5fe306.chunk.js",
+    "static/css/main.e6eed2ad.chunk.css",
+    "static/js/main.90ca550f.chunk.js"
   ]
 }
