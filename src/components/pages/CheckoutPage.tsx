@@ -22,6 +22,7 @@ import dudePicture from '../../icons/dude.svg';
 import { useDispatch } from 'react-redux';
 import { clearLocalCartAction } from '../../types/localCart';
 import TextInput from '../inputs/TextInput';
+import { useMediaQuery } from 'react-responsive';
 
 const emptyBillingObj: Billing = {
     customer: { firstname: "", lastname: "", email: "" },
@@ -167,6 +168,8 @@ const CheckoutPage: FC = () => {
         goHome();
     }
 
+    const isSmallScreen = useMediaQuery({ query: "(max-width: 700px)" });
+
     // if Cart is empty, redirect to Home page
     if (cartProducts.length === 0) {
         goHome();
@@ -198,41 +201,75 @@ const CheckoutPage: FC = () => {
                         <>
                             <div className="checkout-page__body">
                                 <ContentBlock title="Double-check Your cart" className="cart">
-                                    <table className="checkout-cart-table">
-                                        <thead>
-                                            <tr className="table-header-row">
-                                                <th colSpan={3} className="product-cell">Product</th>
-                                                <th className="quantity-cell">Quantity</th>
-                                                <th className="price-cell">Price</th>
-                                                <th className="empty-cell" colSpan={2} />
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {cartProducts.map(cp => (
-                                                <tr key={cp.product.id} className="product-row">
-                                                    <td className="empty-cell" />
-                                                    <td className="picture-cell">
-                                                        <Img className="picture"
-                                                            src={cp.product.media.source}
-                                                            alt=""
-                                                            loader={<PuffLoader color="#00B389" />} />
-                                                    </td>
-                                                    <td className="name-cell">{cp.product.name}</td>
-                                                    <td className="quantity-cell">{cp.quantity}</td>
-                                                    <td className="price-cell">${cp.price}</td>
-                                                    <td className="lock-cell"><FaLock className="lock-icon" /></td>
-                                                    <td className="empty-cell" />
-                                                </tr>
-                                            ))}
-                                            <tr className="summary">
-                                                <td className="empty-cell" colSpan={2} />
-                                                <td className="label-cell">Total</td>
-                                                <td className="quantity-cell">{totalQuantity}</td>
-                                                <td className="price-cell">${totalPrice}</td>
-                                                <td className="empty-cell" colSpan={2} />
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    {
+                                        isSmallScreen ?
+                                            <div className="checkout-cart-list">
+                                                <div className="cart-list">
+                                                    {cartProducts.map(cp => (
+                                                        <div key={cp.product.id} className="cart-list-item">
+                                                            <div className="picture__wrapper">
+                                                                <Img className="picture"
+                                                                    src={cp.product.media.source}
+                                                                    alt=""
+                                                                    loader={<PuffLoader color="#00B389" />} />
+                                                            </div>
+                                                            <div className="info">
+                                                                <span className="name">{cp.product.name}</span>
+                                                                <div className="quantity-block">
+                                                                    <span className="label">Quantity: </span>
+                                                                    <span className="quantity">{cp.quantity}</span>
+                                                                </div>
+                                                                <span className="price">${cp.price}</span>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <div className="cart-summary">
+                                                    <span className="total-label">Total</span>
+                                                    <div className="quantity-block">
+                                                        <span className="label">Qty: </span>
+                                                        <span className="quantity">{totalQuantity}</span>
+                                                    </div>
+                                                    <span className="price">${totalPrice}</span>
+                                                </div>
+                                            </div>
+                                            :
+                                            <table className="checkout-cart-table">
+                                                <thead>
+                                                    <tr className="table-header-row">
+                                                        <th colSpan={3} className="product-cell">Product</th>
+                                                        <th className="quantity-cell">Quantity</th>
+                                                        <th className="price-cell">Price</th>
+                                                        <th className="empty-cell" colSpan={2} />
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {cartProducts.map(cp => (
+                                                        <tr key={cp.product.id} className="product-row">
+                                                            <td className="empty-cell" />
+                                                            <td className="picture-cell">
+                                                                <Img className="picture"
+                                                                    src={cp.product.media.source}
+                                                                    alt=""
+                                                                    loader={<PuffLoader color="#00B389" />} />
+                                                            </td>
+                                                            <td className="name-cell">{cp.product.name}</td>
+                                                            <td className="quantity-cell">{cp.quantity}</td>
+                                                            <td className="price-cell">${cp.price}</td>
+                                                            <td className="lock-cell"><FaLock className="lock-icon" /></td>
+                                                            <td className="empty-cell" />
+                                                        </tr>
+                                                    ))}
+                                                    <tr className="summary">
+                                                        <td className="empty-cell" colSpan={2} />
+                                                        <td className="label-cell">Total</td>
+                                                        <td className="quantity-cell">{totalQuantity}</td>
+                                                        <td className="price-cell">${totalPrice}</td>
+                                                        <td className="empty-cell" colSpan={2} />
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    }
                                 </ContentBlock>
                                 <ContentBlock title="Fill out Your information" className="billing">
                                     <div className="contact-info">

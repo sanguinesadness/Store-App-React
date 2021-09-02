@@ -6,16 +6,17 @@ import { BsTriangleFill } from 'react-icons/bs';
 import Magnifier from 'react-magnifier';
 
 export interface IndexedImage {
-    //! value must be unique
+    //! index must be unique
     index: number;
     source: string;
 }
 
 interface ImageViewerProps {
     images: IndexedImage[];
+    type: "switcher" | "image-only";
 }
 
-const ImageViewer: FC<ImageViewerProps> = ({ images }) => {
+const ImageViewer: FC<ImageViewerProps> = ({ images, type }) => {
     const switcherRef = useRef<HTMLDivElement>(null);
 
     // Item height in CSS is 100ps by default (with margin)
@@ -33,29 +34,45 @@ const ImageViewer: FC<ImageViewerProps> = ({ images }) => {
     }
 
     const scrollBack = () => {
-        if (!switcherRef.current || selectedImage.index < 1) {
+        if (!switcherRef.current) {
             return;
         }
+
+        setPrevImage();
 
         switcherRef.current.scrollTo({
             top: switcherRef.current.scrollTop - switcherItemHeight,
             behavior: "smooth"
         });
-
-        setSelectedImage(images[selectedImage.index - 1]);
     }
 
     const scrollForward = () => {
-        if (!switcherRef.current || selectedImage.index >= images.length - 1) {
+        if (!switcherRef.current) {
             return;
         }
+
+        setNextImage();
 
         switcherRef.current.scrollTo({
             top: switcherRef.current.scrollTop + switcherItemHeight,
             behavior: "smooth"
         });
+    }
+
+    const setNextImage = () => {
+        if (selectedImage.index >= images.length - 1) {
+            return;
+        }
 
         setSelectedImage(images[selectedImage.index + 1]);
+    }
+    
+    const setPrevImage = () => {
+        if (selectedImage.index < 1) {
+            return;
+        }
+
+        setSelectedImage(images[selectedImage.index - 1]);
     }
 
     useEffect(() => {
@@ -67,33 +84,56 @@ const ImageViewer: FC<ImageViewerProps> = ({ images }) => {
     }, [images]);
 
     return (
-        <div className="image-viewer">
-            <div className="carousel">
-                <span className={`back-arrow__wrapper ${backArrowDisabled ? "disabled" : ""}`} 
-                      onClick={scrollBack}>
-                    <BsTriangleFill className="arrow"/>
-                </span>
-                <div className="switcher" ref={switcherRef}>
-                    {images.map(image => (
-                        <div key={image.index} className={`switcher-item ${isImageSelected(image.source) ? "selected" : ""}`} 
-                             onClick={() => setSelectedImage(image)}>
-                            <span className="selection-indicator" />
-                            <img src={image.source} alt="" className="image"/>
+        <div className={`image-viewer ${type}`}>
+            {
+                type === "switcher" ? 
+                    <>
+                        <div className="carousel">
+                            <span className={`back-arrow__wrapper ${backArrowDisabled ? "disabled" : ""}`}
+                                onClick={scrollBack}>
+                                <BsTriangleFill className="arrow" />
+                            </span>
+                            <div className="switcher" ref={switcherRef}>
+                                {images.map(image => (
+                                    <div key={image.index} className={`switcher-item ${isImageSelected(image.source) ? "selected" : ""}`}
+                                        onClick={() => setSelectedImage(image)}>
+                                        <span className="selection-indicator" />
+                                        <img src={image.source} alt="" className="image" />
+                                    </div>
+                                ))}
+                            </div>
+                            <span className={`forward-arrow__wrapper ${forwardArrowDisabled ? "disabled" : ""}`}
+                                onClick={scrollForward}>
+                                <BsTriangleFill className="arrow" />
+                            </span>
                         </div>
-                    ))}
-                </div>
-                <span className={`forward-arrow__wrapper ${forwardArrowDisabled ? "disabled" : ""}`} 
-                      onClick={scrollForward}>
-                    <BsTriangleFill className="arrow"/>
-                </span>
-            </div>
-            <div className="selected-image__wrapper">
-                <Magnifier src={selectedImage.source} 
-                           zoomFactor={1.1}
-                           mgShape="circle"
-                           mgTouchOffsetX={0}
-                           mgMouseOffsetY={0}/>
-            </div>
+                        <div className="selected-image__wrapper">
+                            <Magnifier src={selectedImage.source}
+                                zoomFactor={1.1}
+                                mgShape="circle"
+                                mgTouchOffsetX={0}
+                                mgMouseOffsetY={0} />
+                        </div>
+                    </>
+                    :
+                    <>
+                        <span className={`back-arrow__wrapper ${backArrowDisabled ? "disabled" : ""}`}
+                            onClick={setPrevImage}>
+                            <BsTriangleFill className="arrow" />
+                        </span>
+                        <div className="selected-image__wrapper">
+                            <Magnifier src={selectedImage.source}
+                                zoomFactor={1.1}
+                                mgShape="circle"
+                                mgTouchOffsetX={0}
+                                mgMouseOffsetY={0} />
+                        </div>
+                        <span className={`forward-arrow__wrapper ${forwardArrowDisabled ? "disabled" : ""}`}
+                            onClick={setNextImage}>
+                            <BsTriangleFill className="arrow" />
+                        </span>
+                    </>
+            }
         </div>
     )
 }

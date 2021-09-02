@@ -1,7 +1,6 @@
 import { Product } from '@chec/commerce.js/types/product';
 import React, { FC, useState } from 'react';
 import { useEffect } from 'react';
-import { createRef } from 'react';
 import { useRef } from 'react';
 import { BsTriangleFill } from 'react-icons/bs';
 import { Img } from 'react-image';
@@ -12,9 +11,10 @@ import gsap from 'gsap';
 
 interface RelatedProductsProps {
     product: Product;
+    type: "switcher" | "list";
 }
 
-const RelatedProducts: FC<RelatedProductsProps> = ({ product }) => {
+const RelatedProducts: FC<RelatedProductsProps> = ({ product, type }) => {
     const { products: allProducts } = useTypedSelector(root => root.product);
 
     const getProductCategorySlug = (prod: Product): string => {
@@ -86,7 +86,7 @@ const RelatedProducts: FC<RelatedProductsProps> = ({ product }) => {
     }, [product]);
 
     return (
-        <div className="related-products__wrapper">
+        <div className={`related-products__wrapper ${type}`}>
             <h4 className="title">Related Products</h4>
             <div className="container">
                 <span className={`back-arrow__wrapper ${backArrowDisabled ? "disabled" : ""}`}
@@ -97,14 +97,34 @@ const RelatedProducts: FC<RelatedProductsProps> = ({ product }) => {
                     {product.related_products.map((prod, index) => (
                         <Link to={`/${getProductCategorySlug(prod)}/${prod.id}`} key={index} className="related-product">
                             <div className="container">
-                                <div className="product-picture__wrapper">
-                                    <Img className="product-picture"
-                                        src={prod.media.source}
-                                        alt=""
-                                        loader={<PuffLoader color="#DDDDDD" />} />
-                                </div>
-                                <span className="product-name">{prod.name}</span>
-                                <span className="product-price">{prod.price.formatted_with_symbol}</span>
+                                {
+                                    type === "list" ?
+                                        <>
+                                            <div className="left-section">
+                                                <span className="product-name">{prod.name}</span>
+                                                <span className="product-price">{prod.price.formatted_with_symbol}</span>
+                                            </div>
+                                            <div className="right-section">
+                                                <div className="product-picture__wrapper">
+                                                    <Img className="product-picture"
+                                                        src={prod.media.source}
+                                                        alt=""
+                                                        loader={<PuffLoader color="#DDDDDD" />} />
+                                                </div>
+                                            </div>
+                                        </>
+                                        :
+                                        <>
+                                            <div className="product-picture__wrapper">
+                                                <Img className="product-picture"
+                                                    src={prod.media.source}
+                                                    alt=""
+                                                    loader={<PuffLoader color="#DDDDDD" />} />
+                                            </div>
+                                            <span className="product-name">{prod.name}</span>
+                                            <span className="product-price">{prod.price.formatted_with_symbol}</span>
+                                        </>
+                                }
                             </div>
                             <span className="selection-indicator" />
                         </Link>

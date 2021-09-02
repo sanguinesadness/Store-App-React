@@ -1,4 +1,4 @@
-import React, { FC, SetStateAction } from 'react';
+import React, { FC } from 'react';
 import { useEffect } from 'react';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -11,6 +11,7 @@ import { setScrollPercentAction } from '../../types/scroll';
 import { FiChevronRight } from 'react-icons/fi';
 import ProductInfo from '../ProductInfo';
 import RelatedProducts from '../RelatedProducts';
+import { useMediaQuery } from 'react-responsive';
 
 interface ProductPageParams {
     id: string;
@@ -20,6 +21,8 @@ const ProductPage: FC = () => {
     const { pathname } = useLocation();
     const params = useParams<ProductPageParams>();
     const dispatch = useDispatch();
+
+    const isMobileScreen = useMediaQuery({ query: "(max-width: 800px)" });
 
     const { products, loading, error } = useTypedSelector(root => root.product);
     const { selectedCategory } = useTypedSelector(root => root.category);
@@ -51,7 +54,8 @@ const ProductPage: FC = () => {
                             <span className="product-name">{selectedProduct.name}</span>
                         </header>
                         <ProductInfo product={selectedProduct}/>
-                        <RelatedProducts product={selectedProduct}/>
+                        <RelatedProducts product={selectedProduct}
+                                         type={isMobileScreen ? "list" : "switcher"}/>
                     </div>
                 : 
                     <div className="product-page-error page-error">

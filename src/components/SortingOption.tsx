@@ -1,6 +1,7 @@
 import React, { FC, SetStateAction, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setActiveSortingOptionAction, SortingOption as SortingOptionType } from '../types/sortingOption';
+import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 
 interface SortingOptionProps {
     sortingOption: SortingOptionType;
@@ -35,7 +36,7 @@ const SortingOption: FC<SortingOptionProps> = ({ sortingOption, setSelectedOptio
         <div className={`sorting-option ${disabled ? "disabled" : isSelected ? "selected" : ""}`} onClick={clickHandler}>
             <span className="name">{optionState.name}</span>
             <span className="type">
-                {optionState.ascending ? "🠕" : "🠗"}
+                {optionState.ascending ? <FaLongArrowAltUp/> : <FaLongArrowAltDown/>}
             </span>
         </div>
     )
