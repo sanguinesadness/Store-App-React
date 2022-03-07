@@ -1,3 +1,5 @@
+## ⚠️ Backend (Commerce.js) may be unavailable depending on your location. ⚠️
+
 ![fakestore_logo_full](https://user-images.githubusercontent.com/59533126/132042542-afaa6446-a823-4f14-b2b7-5b332fd3bcbf.png)
 ## About
 A commerce web application where You can pick up products and make a payment with a fake credit card.
